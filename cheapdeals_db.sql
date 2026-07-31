@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2026 at 06:35 AM
+-- Generation Time: Jul 31, 2026 at 09:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,39 +109,42 @@ CREATE TABLE `packages` (
   `type` varchar(50) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `sale_price` decimal(10,2) DEFAULT NULL,
+  `sale_end_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `packages`
 --
 
-INSERT INTO `packages` (`id`, `name`, `type`, `description`, `price`, `is_active`) VALUES
-(1, 'iPhone 15 Standard', 'MobileOnly', 'Brand new 128GB Smartphone (Device Only)', 699.00, 1),
-(2, 'Smartphone Starter Combo', 'Combo', 'Basic Service Plan + 5G Data Bundle', 20.00, 1),
-(3, 'Pixel 8 Pro Flagship', 'MobileOnly', 'Google Pixel 8 Pro 256GB (Device Only)', 799.00, 1),
-(4, 'Wi-Fi 6 Home Router', 'BroadbandOnly', 'High-Speed Wireless Router Hardware Only', 89.00, 1),
-(5, 'Family Mega Bundle', 'Combo', '4x Mobile Lines + 300Mbps Fiber Service', 65.00, 1),
-(6, 'Samsung Galaxy S24', 'MobileOnly', 'Latest Flagship Samsung Device Only', 749.00, 1),
-(7, 'Mesh Wi-Fi System', 'BroadbandOnly', 'Dual-Band Mesh Router Hardware Only', 120.00, 1),
-(8, 'Enterprise Duo Combo', 'Combo', 'Business Phone Line + 1Gbps Fiber Plan', 89.00, 1),
-(9, 'Budget Android Phone', 'MobileOnly', 'Entry-level Smartphone Device Only', 199.00, 1),
-(10, 'Weekend Streamer Pack', 'Combo', 'Unlimited Weekend Data Service Plan', 15.00, 1),
-(11, 'Smart Fiber Gateway', 'BroadbandOnly', 'Fiber Optic Modem & Gateway Hardware', 95.00, 1),
-(12, 'Ultimate Gamer Combo', 'Combo', 'Low-Latency 300Mbps Fiber + Mobile Plan', 75.00, 1),
-(13, 'Senior Easy Phone', 'MobileOnly', 'Large Button Simple Mobile Device Only', 79.00, 1),
-(14, 'Global Roaming Pass', 'Combo', 'International Voice & Data Service Pass', 35.00, 1),
-(15, 'Business Core Router', 'BroadbandOnly', 'Enterprise Grade Network Hardware Only', 250.00, 1),
-(16, 'Budget Family Combo', 'Combo', '2x Mobile Lines + 150Mbps Fiber Plan', 50.00, 1),
-(17, 'Flexi Data Booster', 'Combo', 'Extra 10GB High-Speed Data Add-on Plan', 7.00, 1),
-(18, 'Gigabit Network Switch', 'BroadbandOnly', '8-Port High-Speed Switch Hardware Only', 45.00, 1),
-(19, 'Flagship Phone & Net', 'Combo', 'Latest iPhone + Unlimited 5G Service Plan', 60.00, 1),
-(20, 'Teens Social Pack', 'Combo', 'Unlimited Social Media Apps Service Plan', 10.00, 1),
-(21, 'Suburban Fiber Modem', 'BroadbandOnly', 'Dedicated Fiber Terminal Hardware Only', 110.00, 1),
-(22, 'Dual SIM Pro Combo', 'Combo', '2 Numbers Active + 50GB Shared Plan', 32.00, 1),
-(23, 'Refurbished iPhone SE', 'MobileOnly', 'Certified Pre-owned Device Only', 249.00, 1),
-(24, 'Outdoor Access Point', 'BroadbandOnly', 'Weatherproof Wi-Fi Extender Hardware Only', 140.00, 1),
-(25, 'The Ultimate All-In-One', 'Combo', 'Full Enterprise Service + Hardware Bundle', 120.00, 1);
+INSERT INTO `packages` (`id`, `name`, `type`, `description`, `price`, `is_active`, `sale_price`, `sale_end_date`) VALUES
+(1, 'iPhone 15 Standard', 'MobileOnly', 'Brand new 128GB Smartphone (Device Only)', 699.00, 1, NULL, NULL),
+(2, 'Smartphone Starter Combo', 'Combo', 'Basic Service Plan + 5G Data Bundle', 20.00, 1, NULL, NULL),
+(3, 'Pixel 8 Pro Flagship', 'MobileOnly', 'Google Pixel 8 Pro 256GB (Device Only)', 799.00, 1, NULL, NULL),
+(4, 'Wi-Fi 6 Home Router', 'BroadbandOnly', 'High-Speed Wireless Router Hardware Only', 89.00, 1, NULL, NULL),
+(5, 'Family Mega Bundle', 'Combo', '4x Mobile Lines + 300Mbps Fiber Service', 65.00, 1, NULL, NULL),
+(6, 'Samsung Galaxy S24', 'MobileOnly', 'Latest Flagship Samsung Device Only', 749.00, 1, NULL, NULL),
+(7, 'Mesh Wi-Fi System', 'BroadbandOnly', 'Dual-Band Mesh Router Hardware Only', 120.00, 1, NULL, NULL),
+(8, 'Enterprise Duo Combo', 'Combo', 'Business Phone Line + 1Gbps Fiber Plan', 89.00, 1, NULL, NULL),
+(9, 'Budget Android Phone', 'MobileOnly', 'Entry-level Smartphone Device Only', 199.00, 1, NULL, NULL),
+(10, 'Weekend Streamer Pack', 'Combo', 'Unlimited Weekend Data Service Plan', 15.00, 1, NULL, NULL),
+(11, 'Smart Fiber Gateway', 'BroadbandOnly', 'Fiber Optic Modem & Gateway Hardware', 95.00, 1, NULL, NULL),
+(12, 'Ultimate Gamer Combo', 'Combo', 'Low-Latency 300Mbps Fiber + Mobile Plan', 75.00, 1, NULL, NULL),
+(13, 'Senior Easy Phone', 'MobileOnly', 'Large Button Simple Mobile Device Only', 79.00, 1, NULL, NULL),
+(14, 'Global Roaming Pass', 'Combo', 'International Voice & Data Service Pass', 35.00, 1, NULL, NULL),
+(15, 'Business Core Router', 'BroadbandOnly', 'Enterprise Grade Network Hardware Only', 250.00, 1, NULL, NULL),
+(16, 'Budget Family Combo', 'Combo', '2x Mobile Lines + 150Mbps Fiber Plan', 50.00, 1, NULL, NULL),
+(17, 'Flexi Data Booster', 'Combo', 'Extra 10GB High-Speed Data Add-on Plan', 7.00, 1, NULL, NULL),
+(18, 'Gigabit Network Switch', 'BroadbandOnly', '8-Port High-Speed Switch Hardware Only', 45.00, 1, NULL, NULL),
+(19, 'Flagship Phone & Net', 'Combo', 'Latest iPhone + Unlimited 5G Service Plan', 60.00, 1, NULL, NULL),
+(20, 'Teens Social Pack', 'Combo', 'Unlimited Social Media Apps Service Plan', 10.00, 1, NULL, NULL),
+(21, 'Suburban Fiber Modem', 'BroadbandOnly', 'Dedicated Fiber Terminal Hardware Only', 110.00, 1, NULL, NULL),
+(22, 'Dual SIM Pro Combo', 'Combo', '2 Numbers Active + 50GB Shared Plan', 32.00, 1, NULL, NULL),
+(23, 'Refurbished iPhone SE', 'MobileOnly', 'Certified Pre-owned Device Only', 249.00, 1, NULL, NULL),
+(24, 'Outdoor Access Point', 'BroadbandOnly', 'Weatherproof Wi-Fi Extender Hardware Only', 140.00, 1, NULL, NULL),
+(25, 'The Ultimate All-In-One', 'Combo', 'Full Enterprise Service + Hardware Bundle', 120.00, 1, NULL, NULL),
+(26, '117 TR', '', 'nice', 399.00, 1, 299.00, '2026-08-01 14:06:00');
 
 -- --------------------------------------------------------
 
@@ -262,7 +265,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `promo_codes`

@@ -19,5 +19,9 @@
         </div>
 
         <button type="submit" class="btn-submit" style="width: 100%; padding: 12px; background-color: #d9534f; border: none; color: white; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">Sign In</button>
+        
+        <div style="text-align: center; margin-top: 15px; font-size: 14px;">
+            Don't have an account? <a href="register.php" style="color: #0275d8; text-decoration: none; font-weight: bold;">Register here</a>
+        </div>
     </form>
 </div>
