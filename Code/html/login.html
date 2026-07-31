@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login & Register</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo / Header -->
+        <div class="header">
+            <h1>E-Shop</h1>
+            <p>Smart mobile shopping</p>
+        </div>
+
+        <!-- Toggle Buttons -->
+        <div class="tabs">
+            <button id="btnLoginTab" class="tab-btn active-tab" onclick="switchForm('login')">
+                Login
+            </button>
+            <button id="btnRegisterTab" class="tab-btn inactive-tab" onclick="switchForm('register')">
+                Register
+            </button>
+        </div>
+
+        <!-- Form Area -->
+        <div class="form-wrapper">
+            
+            <!-- LOGIN FORM -->
+            <form id="loginForm" class="form-transition active-form">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-login">
+                    Login
+                </button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" class="form-transition hidden-form">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Enter your phone number" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a password" required>
+                </div>
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn btn-register">
+                    Create Account
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- JS Link -->
+    <script src="../js/login.js"></script>
+</body>
+</html>

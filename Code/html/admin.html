@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop - Admin Management</title>
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header" style="background-color: #16a34a;">
+            <div class="logo">Admin Dashboard</div>
+            <div class="header-icons">
+                <a href="profile.html" style="text-decoration: none; color: white; font-size: 0.9rem; font-weight: 600;">Back</a>
+            </div>
+        </header>
+
+        <!-- Admin Content -->
+        <div style="padding: 1rem;">
+            <h3 style="margin-bottom: 0.75rem; color: #1f2937; font-size: 1rem;">Store Overview</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.5rem;">
+                <div class="product-card" style="text-align: center; padding: 1rem;">
+                    <span style="font-size: 1.25rem; font-weight: bold; color: #16a34a;" id="totalOrdersCount">0</span>
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">Total Orders</p>
+                </div>
+                <div class="product-card" style="text-align: center; padding: 1rem;">
+                    <span style="font-size: 1.25rem; font-weight: bold; color: #2563eb;" id="shopStatus">Active</span>
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.25rem;">Shop Status</p>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 0.75rem; color: #1f2937; font-size: 1rem;">Manage Customer Orders</h3>
+            <div id="adminOrdersList">
+                <!-- Danh sách đơn hàng từ localStorage sẽ được đổ vào đây -->
+            </div>
+        </div>
+
+        <!-- Bottom Navigation (Giữ nguyên menu điều hướng) -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <span class="nav-icon">🏠</span><span>Home</span>
+            </a>
+            <a href="data.html" class="nav-item">
+                <span class="nav-icon">📶</span><span>Data</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <span class="nav-icon">📦</span><span>Orders</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">👤</span><span>Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Load danh sách đơn hàng để Admin quản lý
+        document.addEventListener('DOMContentLoaded', () => {
+            const orders = JSON.parse(localStorage.getItem('myOrders')) || [];
+            const history = JSON.parse(localStorage.getItem('myHistory')) || [];
+            
+            const totalCount = document.getElementById('totalOrdersCount');
+            totalCount.textContent = orders.length + history.length;
+
+            const adminList = document.getElementById('adminOrdersList');
+            adminList.innerHTML = '';
+
+            const allStoreOrders = [...orders, ...history];
+
+            if (allStoreOrders.length === 0) {
+                adminList.innerHTML = `<p style="text-align: center; color: #6b7280; font-size: 0.85rem; padding: 2rem 0;">No customer orders yet.</p>`;
+            } else {
+                allStoreOrders.forEach((order, index) => {
+                    adminList.innerHTML += `
+                        <div class="product-card" style="margin-bottom: 0.75rem; border-left: 4px solid #16a34a;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                                <strong style="font-size: 0.875rem; color: #1f2937;">${order.name}</strong>
+                                <span style="color: #16a34a; font-weight: bold; font-size: 0.75rem; background: #f0fdf4; padding: 0.2rem 0.5rem; border-radius: 0.25rem;">${order.status || 'Completed'}</span>
+                            </div>
+                            <p style="font-size: 0.75rem; color: #6b7280;">Date: ${order.date}</p>
+                        </div>
+                    `;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
