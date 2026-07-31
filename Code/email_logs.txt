@@ -1,0 +1,4 @@
+[2026-07-29 14:44:38] WELCOME EMAIL - To: lamvinhthang@gmail.com - Status: FAILED (Simulated)
+[2026-07-30 09:31:03] Receipt sent for Order #1 to User #3
+[2026-07-30 09:48:03] Receipt sent for Order #2 to User #3
+[2026-07-30 12:50:48] Receipt sent for Order #3 to User #3
