@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2026 at 09:17 AM
+-- Generation Time: Aug 05, 2026 at 02:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -144,7 +144,23 @@ INSERT INTO `packages` (`id`, `name`, `type`, `description`, `price`, `is_active
 (23, 'Refurbished iPhone SE', 'MobileOnly', 'Certified Pre-owned Device Only', 249.00, 1, NULL, NULL),
 (24, 'Outdoor Access Point', 'BroadbandOnly', 'Weatherproof Wi-Fi Extender Hardware Only', 140.00, 1, NULL, NULL),
 (25, 'The Ultimate All-In-One', 'Combo', 'Full Enterprise Service + Hardware Bundle', 120.00, 1, NULL, NULL),
-(26, '117 TR', '', 'nice', 399.00, 1, 299.00, '2026-08-01 14:06:00');
+(26, '117 TR', '', 'nice', 399.00, 1, 299.00, '2026-08-01 14:06:00'),
+(27, 'Starter 4G Mobile', 'MobileOnly', '10GB data, 500 minutes, and unlimited texts for light users.', 12.50, 1, NULL, NULL),
+(28, 'Global Roaming Mobile', 'MobileOnly', 'Unlimited UK data plus free international roaming across 50 countries.', 35.00, 1, NULL, NULL),
+(29, 'Family Share Mobile Plan', 'MobileOnly', 'Shared 100GB high-speed data pool for up to 4 family members.', 50.00, 1, NULL, NULL),
+(30, 'Basic ADSL Broadband', 'BroadbandOnly', 'Reliable standard broadband with up to 36Mbps download speed.', 22.00, 1, NULL, NULL),
+(31, 'Gigabit Ultrafast Fibre', 'BroadbandOnly', 'Blazing-fast 900Mbps fibre connection for heavy streaming and gaming.', 45.00, 1, NULL, NULL),
+(32, 'No-Contract Student Broadband', 'BroadbandOnly', 'Flexible 30-day rolling broadband contract with free activation.', 28.00, 1, NULL, NULL),
+(33, 'Compact 8-inch Tablet Plan', 'TabletOnly', 'Portable 8-inch tablet bundle with 15GB monthly mobile data.', 15.00, 1, NULL, NULL),
+(34, 'Pro Creator Tablet Bundle', 'TabletOnly', 'High-performance tablet with stylus included and 100GB data.', 32.00, 1, NULL, NULL),
+(35, 'Budget Kids Tablet Deal', 'TabletOnly', 'Kid-safe rugged tablet with parental controls and 20GB data.', 18.00, 1, NULL, NULL),
+(36, 'Work From Home Double', 'DoublePackage', 'Fast broadband paired with a dedicated business mobile SIM.', 40.00, 1, NULL, NULL),
+(37, 'Streamer Duo Bundle', 'DoublePackage', 'Fibre broadband plus unlimited streaming mobile data pack.', 52.00, 1, NULL, NULL),
+(38, 'Essential Home & Mobile Duo', 'DoublePackage', 'Standard broadband and 20GB mobile plan combined at a saving.', 38.00, 1, NULL, NULL),
+(39, 'Ultimate Family Triple', 'TriplePackage', 'Home fibre broadband, 2 mobile lines, and a family tablet bundle.', 75.00, 1, NULL, NULL),
+(40, 'VIP Entertainment Triple', 'TriplePackage', 'Gigabit broadband, unlimited mobile 5G, and premium tablet package.', 89.00, 1, NULL, NULL),
+(41, 'Smart Home Triple Deal', 'TriplePackage', 'Broadband, mobile data, and connected tablet with smart hub accessories.', 65.00, 1, NULL, NULL),
+(42, 'Porche911', 'DoublePackage', '', 900.00, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -265,7 +281,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `promo_codes`

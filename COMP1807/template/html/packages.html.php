@@ -6,9 +6,11 @@
     <!-- 1. Bộ nút Lọc (Filter) -->
     <div class="filters" style="margin: 20px 0;">
         <button class="filter-btn active" data-filter="All" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">All</button>
-        <button class="filter-btn" data-filter="Combo" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Combos</button>
         <button class="filter-btn" data-filter="MobileOnly" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Mobile Only</button>
         <button class="filter-btn" data-filter="BroadbandOnly" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Broadband Only</button>
+        <button class="filter-btn" data-filter="TabletOnly" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Tablet Only</button>
+        <button class="filter-btn" data-filter="DoublePackage" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Double Combo</button>
+        <button class="filter-btn" data-filter="TriplePackage" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Triple Combo</button>
     </div>
 
     <!-- 2. Thanh Tìm kiếm (Search) -->

@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 session_start();
 require_once '../includes/db.php';
 
+// Kiểm tra quyền Admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login.php");
     exit();
@@ -18,29 +19,28 @@ $editPackage = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? null;
     $name = trim($_POST['name'] ?? '');
+    $type = trim($_POST['type'] ?? '');
     $price = trim($_POST['price'] ?? '');
     $description = trim($_POST['description'] ?? '');
-    $sale_price = !empty($_POST['sale_price']) ? $_POST['sale_price'] : null;
-    $sale_end_date = !empty($_POST['sale_end_date']) ? $_POST['sale_end_date'] : null;
 
-    if (!empty($name) && !empty($price)) {
+    if (!empty($name) && !empty($type) && !empty($price)) {
         try {
             if ($id) {
                 // Cập nhật package
-                $stmt = $conn->prepare("UPDATE packages SET name = ?, price = ?, sale_price = ?, sale_end_date = ?, description = ? WHERE id = ?");
-                $stmt->execute([$name, $price, $sale_price, $sale_end_date, $description, $id]);
+                $stmt = $conn->prepare("UPDATE packages SET name = ?, type = ?, price = ?, description = ? WHERE id = ?");
+                $stmt->execute([$name, $type, $price, $description, $id]);
                 $success = "Package updated successfully!";
             } else {
                 // Thêm mới package
-                $stmt = $conn->prepare("INSERT INTO packages (name, price, sale_price, sale_end_date, description) VALUES (?, ?, ?, ?, ?)");
-                $stmt->execute([$name, $price, $sale_price, $sale_end_date, $description]);
+                $stmt = $conn->prepare("INSERT INTO packages (name, type, price, description) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$name, $type, $price, $description]);
                 $success = "Package added successfully!";
             }
         } catch (Exception $e) {
             $error = "Database Error: " . $e->getMessage();
         }
     } else {
-        $error = "Please fill in all required fields!";
+        $error = "Please fill in all required fields (Name, Type, Price)!";
     }
 }
 

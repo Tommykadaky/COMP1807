@@ -1,68 +1,86 @@
 <?php include 'header.html.php'; ?>
 
-<div class="main-container">
-    <h2><?= $editPackage ? 'Edit Package' : 'Add Package' ?></h2>
-    <?php if (!empty($error)): ?><div style="color: #cc0000; background: #ffe6e6; padding: 8px; margin-bottom: 10px;"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <?php if (!empty($success)): ?><div style="color: #2b542c; background: #d4edda; padding: 8px; margin-bottom: 10px;"><?= htmlspecialchars($success) ?></div><?php endif; ?>
+<div class="main-container" style="padding: 20px;">
+    <h2>Manage Packages</h2>
 
-    <form method="POST" style="background: #f9f9f9; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
-        <input type="hidden" name="id" value="<?= $editPackage['id'] ?? '' ?>">
+    <?php if (!empty($success)): ?><div style="color: #2b542c; background: #d4edda; padding: 10px; border-radius: 4px; margin-bottom: 15px;"><?= htmlspecialchars($success) ?></div><?php endif; ?>
+    <?php if (!empty($error)): ?><div style="color: #cc0000; background: #ffe6e6; padding: 10px; border-radius: 4px; margin-bottom: 15px;"><?= htmlspecialchars($error) ?></div><?php endif; ?>
 
-        <label>Package Name</label>
-        <input type="text" name="name" value="<?= htmlspecialchars($editPackage['name'] ?? '') ?>" required>
+    <!-- Form Thêm / Sửa Package -->
+    <div style="background: #f9f9f9; padding: 20px; border-radius: 6px; border: 1px solid #ddd; margin-bottom: 25px;">
+        <h3><?= $editPackage ? 'Edit Package (ID: ' . $editPackage['id'] . ')' : 'Add New Package' ?></h3>
+        <form method="POST">
+            <?php if ($editPackage): ?>
+                <input type="hidden" name="id" value="<?= $editPackage['id'] ?>">
+            <?php endif; ?>
 
-        <label style="margin-top: 10px; display: block;">Original Price ($)</label>
-        <input type="number" step="0.01" name="price" value="<?= htmlspecialchars($editPackage['price'] ?? '') ?>" required>
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Package Name *</label>
+                <input type="text" name="name" required value="<?= htmlspecialchars($editPackage['name'] ?? '') ?>" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
 
-        <label style="margin-top: 10px; display: block;">Sale Price ($)</label>
-        <input type="number" step="0.01" name="sale_price" value="<?= htmlspecialchars($editPackage['sale_price'] ?? '') ?>">
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Package Type *</label>
+                <select name="type" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="">-- Select Package Type --</option>
+                    <option value="MobileOnly" <?= (isset($editPackage) && $editPackage['type'] === 'MobileOnly') ? 'selected' : '' ?>>MobileOnly</option>
+                    <option value="BroadbandOnly" <?= (isset($editPackage) && $editPackage['type'] === 'BroadbandOnly') ? 'selected' : '' ?>>BroadbandOnly</option>
+                    <option value="TabletOnly" <?= (isset($editPackage) && $editPackage['type'] === 'TabletOnly') ? 'selected' : '' ?>>TabletOnly</option>
+                    <option value="DoublePackage" <?= (isset($editPackage) && $editPackage['type'] === 'DoublePackage') ? 'selected' : '' ?>>DoublePackage (Any 2)</option>
+                    <option value="TriplePackage" <?= (isset($editPackage) && $editPackage['type'] === 'TriplePackage') ? 'selected' : '' ?>>TriplePackage (All 3)</option>
+                </select>
+            </div>
 
-        <label style="margin-top: 10px; display: block;">Sale End Date</label>
-        <input type="datetime-local" name="sale_end_date" value="<?= htmlspecialchars($editPackage['sale_end_date'] ?? '') ?>">
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Price (£) *</label>
+                <input type="number" step="0.01" name="price" required value="<?= htmlspecialchars($editPackage['price'] ?? '') ?>" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
 
-        <label style="margin-top: 10px; display: block;">Description</label>
-        <textarea name="description" rows="2"><?= htmlspecialchars($editPackage['description'] ?? '') ?></textarea>
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Description / Features</label>
+                <textarea name="description" rows="3" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"><?= htmlspecialchars($editPackage['description'] ?? '') ?></textarea>
+            </div>
 
-        <button type="submit"><?= $editPackage ? 'Update Package' : 'Add Package' ?></button>
-        <?php if ($editPackage): ?>
-            <a href="packages.php" style="display: block; text-align: center; margin-top: 10px; color: #555; text-decoration: none;">Cancel</a>
-        <?php endif; ?>
-    </form>
-
-    <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
-
-    <h2>All Packages</h2>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr style="background: #f4f4f4;">
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Sale</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($packages)): ?>
-                    <?php foreach ($packages as $pkg): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($pkg['id']) ?></td>
-                            <td><?= htmlspecialchars($pkg['name']) ?></td>
-                            <td>$<?= htmlspecialchars($pkg['price']) ?></td>
-                            <td><?= isset($pkg['sale_price']) && $pkg['sale_price'] ? '$' . htmlspecialchars($pkg['sale_price']) : 'None' ?></td>
-                            <td>
-                                <a href="packages.php?edit=<?= $pkg['id'] ?>" style="padding: 4px 8px; background: #f0ad4e; color: white; text-decoration: none; border-radius: 3px; font-size: 12px;">Edit</a>
-                                <a href="packages.php?delete=<?= $pkg['id'] ?>" onclick="return confirm('Delete package?');" style="padding: 4px 8px; background: #d9534f; color: white; text-decoration: none; border-radius: 3px; font-size: 12px;">Del</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr><td colspan="5" style="text-align: center;">No packages found.</td></tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+            <button type="submit" style="background: #d9534f; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;"><?= $editPackage ? 'Update Package' : 'Add Package' ?></button>
+            <?php if ($editPackage): ?>
+                <a href="packages.php" style="margin-left: 10px; text-decoration: none; color: #555;">Cancel</a>
+            <?php endif; ?>
+        </form>
     </div>
+
+    <!-- Bảng danh sách packages -->
+    <h3>Existing Packages</h3>
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; background: #fff;">
+        <thead>
+            <tr style="background: #f2f2f2; text-align: left;">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($packages)): ?>
+                <?php foreach ($packages as $pkg): ?>
+                <tr>
+                    <td><?= htmlspecialchars($pkg['id']) ?></td>
+                    <td><?= htmlspecialchars($pkg['name']) ?></td>
+                    <td><strong><?= htmlspecialchars($pkg['type']) ?></strong></td>
+                    <td>£<?= number_format($pkg['price'], 2) ?></td>
+                    <td><?= htmlspecialchars($pkg['description']) ?></td>
+                    <td>
+                        <a href="packages.php?edit=<?= $pkg['id'] ?>" style="color: #0275d8; text-decoration: none; margin-right: 10px;">Edit</a>
+                        <a href="packages.php?delete=<?= $pkg['id'] ?>" onclick="return confirm('Are you sure you want to delete this package?');" style="color: #d9534f; text-decoration: none;">Delete</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr><td colspan="6" style="text-align: center;">No packages found.</td></tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 
 </div></body></html>
